@@ -1,6 +1,18 @@
 # khaaliNames
 
-Onchain user management library, [now] powered by 
+> [!WARNING]
+> This repository is now archived! Please refer to the following repos for
+> current development:
+> - Deprecation Util :: 
+> [khaaliDimaag/khaaliSemVerV2-eth](https://github.com/khaaliDimaag/khaaliSemVerV2-eth)
+> - Names Util (Contains Dictionary) :: 
+> [khaaliDimaag/khaaliNamesV2-eth](https://github.com/khaaliDimaag/khaaliNamesV2-eth)
+> - Onchain AppStore :: 
+> [khaaliDimaag/khaaliStoreV1-eth](https://github.com/khaaliDimaag/khaaliStoreV1-eth)
+
+
+
+Onchain user management library, powered* by 
 [ENSv2](https://docs.ens.domains/ensv2/overview/).
 
 <details>
