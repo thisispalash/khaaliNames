@@ -17,44 +17,59 @@ Onchain user management library, [now] powered by
 
 </details>
 
-<details>
-
-  <summary>Lore (read: history)</summary>
-
-  _todo section_
-
-</details>
-
-## Deployment Info
-> Currently using special ENSv2 Sepolia conracts. Find all of their addresses 
-> [here](https://6af75b0f.docs-bao.pages.dev/learn/deployments/#sepolia-ensv2-beta)
-> or see [below](ensv2-usage) for khaaliNames relevant ENSv2 contracts.
-
-| Contract | Address | Chain IDs |
-| -------- | ------- | --------- |
-| khaaliExample | 0xdeaddeaddeaddeaddeaddeaddeaddeaddead | [11155111](https://sepolia.etherscan.io/address/0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead#code)
-
-### ENSv2 Usage
-
-| Contract | Address | Chain IDs |
-| -------- | ------- | --------- |
-| ENSv2Example | 0xdeaddeaddeaddeaddeaddeaddeaddeaddead | [11155111](https://sepolia.etherscan.io/address/0xdeaddeaddeaddeaddeaddeaddeaddeaddeaddead#code)
-
 ## What this is
 
 In its simplest form, this project is to help manage users onchain with a lot of
-complexities and annoyances handled by khaaliNames.
+complexities and annoyances handled by khaaliNames. The core module is an 
+onchain utility to generate random names according to milestones, with 
+additional modules on top to apply this utility for user management and 
+transparent contract discoverability. The latter also makes it possible to 
+create a true onchain appstore as we control the registrar for the contract 
+naming, making version upgrades explicit. For more, please see the [video going 
+over the architecture](./assets/video.mov).
 
 ### Modules
 
-**Dictionary**
+**Deprecation Util (V1)**
+
+While upgradeable contracts are immensely useful in terms of bug fixes, one 
+glaring issue with them is that of _rug pulls_; ie, a contract deployer may 
+change the core contracts of an app without any intimation to the app users. 
+The deprecation utility is aimed at making that explicit.
+
+Additionally, this util is how an onchain appstore is really possible since we 
+control the registrar for the contract naming.
+
+**Dictionary (V2)**
+
+The dictionary uses solady's SSTORE2 to store data in the bytecode in an effort 
+to reduce deployment costs. V2 now allows for arbitrary dictionaries instead of 
+a fixed set as in V1. It additionally inherits the deprecation util, which would
+lock the read functions on an upgrade, and a `migrate` functionality for admins 
+to migrate to the names to the new dictionary.
+
+**Names (V2)**
+
+This is the core module in this repo. The change in V2 is to allow for arbitrary
+dictionaries and milestones so an app developer has maximum flexibility. Also 
+introduced is a bitmask system which informs how to generate names from the 
+given dictionaries at a certain milestone.
+
+**Avatar**
+
+_incomplete_
 
 **[Ethereum] Name Service**
 
+_incomplete_
+
 **Smart Contract Account**
 
-**Commercial**
+_incomplete_
 
+**Commerce**
+
+_incomplete_
 
 ## Who this is for
 
@@ -68,13 +83,16 @@ usernames, user owned profiles, and progressive customisability.
 
 ## How to use
 
-_todo section_
+Currently this project is incomplete and this repo is abondoned. To try out V1
+of this concept, please refer to 
+[khaaliDimaag/khaaliNamesV1](https://github.com/khaaliDimaag/khaaliNamesV1) or 
+interact with the contract directly at 
+[`0xa0715EC44766D28ec2Bc8c7e94716A202937d4F2`](https://sepolia.etherscan.io/address/0xa0715ec44766d28ec2bc8c7e94716a202937d4f2#readContract).
 
-## Contributing
-
-Currently the repo is closed for code contributions while I figure out what the 
-exact scope of this project is. That being said, feel free to use the issues
-to add comments, report bugs, or request features!
+Future work will be carried out in the following repos:
+- khaaliDeprecation :: [khaaliDimaag/khaaliSemVerV2-eth](https://github.com/khaaliDimaag/khaaliSemVerV2-eth)
+- khaaliNames :: [khaaliDimaag/khaaliNames-eth](https://github.com/khaaliDimaag/khaaliNames-eth)
+- khaaliStore :: [khaaliDimaag/khaaliStoreV1-eth](https://github.com/khaaliDimaag/khaaliStoreV1-eth)
 
 ## License
 > View full license text [in repo](./LICENSE) instead
